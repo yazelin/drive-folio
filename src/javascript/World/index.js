@@ -14,6 +14,7 @@ import ProjectsSection from './Sections/ProjectsSection.js'
 import CrossroadsSection from './Sections/CrossroadsSection.js'
 import InformationSection from './Sections/InformationSection.js'
 import PlaygroundSection from './Sections/PlaygroundSection.js'
+import RepoCitySection from './Sections/RepoCitySection.js'
 // import DistinctionASection from './Sections/DistinctionASection.js'
 // import DistinctionBSection from './Sections/DistinctionBSection.js'
 // import DistinctionCSection from './Sections/DistinctionCSection.js'
@@ -493,6 +494,14 @@ export default class World
             // y: - 4
         })
         this.container.add(this.sections.playground.container)
+
+        // Repo 城市(開場正北方)
+        this.sections.repoCity = new RepoCitySection({
+            ...options,
+            x: 0,
+            y: 34
+        })
+        this.container.add(this.sections.repoCity.container)
     }
 
     setEasterEggs()

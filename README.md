@@ -12,6 +12,7 @@
 - 開場地上的名字：原作每個字母是一個 Blender 模型，只有 BRUNO SIMON 那幾個字母；改成用 three.js 的 TextGeometry 即時產生「YAZE LIN」，照原作的命名規則包好碰撞，車照樣撞得飛
 - 聯絡區：連結換成我的；拿掉原作者住巴黎的梗（國旗、鐵塔、法國麵包）與對不上的品牌圖示
 - 拿掉原作者線上課程的推銷彈窗
+- 新增 **repo 城市**（開場正北方）：179 個公開 repo 一個一棟樓，分成六區；樓高看星星數、顏色看主要語言、紅屋頂代表有網頁。開進樓前的格子按 Enter 就打開
 - 經歷年表換成我的
 
 原作的授權聲明保留在 [license.md](license.md)。
@@ -34,6 +35,7 @@ node tools/shots.mjs /tmp/shots          # 截圖（需要全域安裝 playwrigh
 python3 tools/make_projects.py /tmp/shots  # 產投影片與地上的文字
 # 2. 開場的名字改 src/javascript/World/Sections/IntroSection.js 的 title
 # 3. 聯絡區連結改 src/javascript/World/Sections/InformationSection.js
+# 4. repo 城市：python3 tools/fetch_repos.py <你的 GitHub 帳號>，分錯區的寫進 tools/repo-overrides.json
 npm run dev
 ```
 
