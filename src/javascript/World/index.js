@@ -15,6 +15,7 @@ import CrossroadsSection from './Sections/CrossroadsSection.js'
 import InformationSection from './Sections/InformationSection.js'
 import PlaygroundSection from './Sections/PlaygroundSection.js'
 import RepoCitySection from './Sections/RepoCitySection.js'
+import CharacterPlazaSection from './Sections/CharacterPlazaSection.js'
 // import DistinctionASection from './Sections/DistinctionASection.js'
 // import DistinctionBSection from './Sections/DistinctionBSection.js'
 // import DistinctionCSection from './Sections/DistinctionCSection.js'
@@ -502,6 +503,14 @@ export default class World
             y: 34
         })
         this.container.add(this.sections.repoCity.container)
+
+        // 角色廣場(開場東邊)
+        this.sections.characterPlaza = new CharacterPlazaSection({
+            ...options,
+            x: 24,
+            y: 6
+        })
+        this.container.add(this.sections.characterPlaza.container)
     }
 
     setEasterEggs()
