@@ -136,21 +136,21 @@ export default class RepoCitySection
         const base = new THREE.Object3D()
         const body = new THREE.Mesh(new THREE.BoxGeometry(SIZE, SIZE, height))
         body.name = `shade${shade[0].toUpperCase()}${shade.slice(1)}`
-        body.position.set(x, y, height / 2)
+        body.position.set(0, 0, height / 2)
         base.add(body)
         if(repo.home)
         {
             // 有網頁的樓,屋頂蓋一塊紅色的(gold 的 matcap 畫出來是彩虹色)
             const roof = new THREE.Mesh(new THREE.BoxGeometry(SIZE * 0.8, SIZE * 0.8, 0.3))
             roof.name = 'shadeRed'
-            roof.position.set(x, y, height + 0.15)
+            roof.position.set(0, 0, height + 0.15)
             base.add(roof)
         }
 
         const collision = new THREE.Object3D()
         const center = new THREE.Object3D()
         center.name = 'center'
-        center.position.set(x, y, height / 2)
+        center.position.set(0, 0, height / 2)
         const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1))
         cube.name = 'cube'
         cube.position.copy(center.position)
@@ -160,7 +160,8 @@ export default class RepoCitySection
         this.objects.add({
             base,
             collision,
-            offset: new THREE.Vector3(0, 0, 0),
+            // 原作的靜態物件是「模型畫在原點＋offset 給世界座標」;陰影跟著容器(= offset)走
+            offset: new THREE.Vector3(x, y, 0),
             rotation: new THREE.Euler(0, 0, 0),
             shadow: { sizeX: SIZE * 1.3, sizeY: SIZE * 1.3, offsetZ: - 0.1, alpha: 0.35 },
             mass: 0

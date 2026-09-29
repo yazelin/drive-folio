@@ -13,6 +13,10 @@
 - 聯絡區：連結換成我的；拿掉原作者住巴黎的梗（國旗、鐵塔、法國麵包）與對不上的品牌圖示
 - 拿掉原作者線上課程的推銷彈窗
 - 新增 **repo 城市**（開場正北方）：179 個公開 repo 一個一棟樓，分成六區；樓高看星星數、顏色看主要語言、紅屋頂代表有網頁。開進樓前的格子按 Enter 就打開
+- 新增 **角色廣場**（開場東邊）：格莉奇、黑洞先生、Mori、優理做成永遠轉向鏡頭的紙板人，格子按 Enter 打開她們的站
+- 新增 **catime 貓圖牆**（開場西北）：最新 12 隻 AI 貓（`tools/fetch_cats.py` 抓的快照）
+- 新增 **週三直播路**（開場往西）：每場直播一根撞得倒的里程碑，按 Enter 打開活動頁（`tools/lives.json`）
+- 作品區從一直線改成兩排（5＋4）
 - 經歷年表換成我的
 
 原作的授權聲明保留在 [license.md](license.md)。
@@ -36,6 +40,7 @@ python3 tools/make_projects.py /tmp/shots  # 產投影片與地上的文字
 # 2. 開場的名字改 src/javascript/World/Sections/IntroSection.js 的 title
 # 3. 聯絡區連結改 src/javascript/World/Sections/InformationSection.js
 # 4. repo 城市：python3 tools/fetch_repos.py <你的 GitHub 帳號>，分錯區的寫進 tools/repo-overrides.json
+# 5. 貓圖牆：python3 tools/fetch_cats.py；直播路：改 tools/lives.json；角色：CharacterPlazaSection.js 的 CHARACTERS
 npm run dev
 ```
 
@@ -44,7 +49,6 @@ npm run dev
 ## 已知問題
 
 - 網站約 17 MB，手機開第一次要等一下
-- 聯絡區地上還留著原作鐵塔的陰影（陰影是烤在地板貼圖上的）
 
 ## 授權
 

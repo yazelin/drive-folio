@@ -16,6 +16,8 @@ import InformationSection from './Sections/InformationSection.js'
 import PlaygroundSection from './Sections/PlaygroundSection.js'
 import RepoCitySection from './Sections/RepoCitySection.js'
 import CharacterPlazaSection from './Sections/CharacterPlazaSection.js'
+import CatWallSection from './Sections/CatWallSection.js'
+import LiveRoadSection from './Sections/LiveRoadSection.js'
 // import DistinctionASection from './Sections/DistinctionASection.js'
 // import DistinctionBSection from './Sections/DistinctionBSection.js'
 // import DistinctionCSection from './Sections/DistinctionCSection.js'
@@ -511,6 +513,14 @@ export default class World
             y: 6
         })
         this.container.add(this.sections.characterPlaza.container)
+
+        // catime 貓圖牆(開場西北)
+        this.sections.catWall = new CatWallSection({ ...options, x: - 34, y: 18 })
+        this.container.add(this.sections.catWall.container)
+
+        // 週三直播路(開場往西)
+        this.sections.liveRoad = new LiveRoadSection({ ...options, x: - 24, y: - 4 })
+        this.container.add(this.sections.liveRoad.container)
     }
 
     setEasterEggs()

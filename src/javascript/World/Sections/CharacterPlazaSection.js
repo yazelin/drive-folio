@@ -89,18 +89,18 @@ export default class CharacterPlazaSection
             const base = new THREE.Object3D()
             const pedestal = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.4, 0.4))
             pedestal.name = 'shadeWhite'
-            pedestal.position.set(x, y, 0.2)
+            pedestal.position.set(0, 0, 0.2)
             base.add(pedestal)
             const collision = new THREE.Object3D()
             const center = new THREE.Object3D()
             center.name = 'center'
-            center.position.set(x, y, 0.2)
+            center.position.set(0, 0, 0.2)
             const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1))
             cube.name = 'cube'
-            cube.position.set(x, y, 0.2)
+            cube.position.set(0, 0, 0.2)
             cube.scale.set(2.2, 1.4, 0.4)
             collision.add(center, cube)
-            this.objects.add({ base, collision, offset: new THREE.Vector3(0, 0, 0), rotation: new THREE.Euler(0, 0, 0), mass: 0,
+            this.objects.add({ base, collision, offset: new THREE.Vector3(x, y, 0), rotation: new THREE.Euler(0, 0, 0), mass: 0,
                 shadow: { sizeX: 2.6, sizeY: 1.8, offsetZ: - 0.1, alpha: 0.35 } })
 
             // 紙板人:外層 pivot 負責轉向,內層平面站起來
