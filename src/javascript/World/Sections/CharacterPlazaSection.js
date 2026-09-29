@@ -1,11 +1,12 @@
 import * as THREE from 'three'
 
 // 角色廣場:我的角色做成紙板人,永遠轉身面向鏡頭;腳下一塊底座(車撞得到),前面格子按 Enter 打開她們的站。
+// 名字與介紹照 yazelin.github.io/characters/ 各角色頁的副標,連結也開角色頁
 const CHARACTERS = [
-    { id: 'glitch', name: '格莉奇', line: '只有 4KB 記憶體的 AI 主播', href: 'https://yazelin.github.io/ai-brain-site/', height: 4.5 },
-    { id: 'blackhole', name: '黑洞先生', line: '格莉奇的製作人,什麼都吃', href: 'https://yazelin.github.io/glitch-vn/', height: 5.0 },
-    { id: 'mori', name: 'Mori', line: '數位森林的精靈,每天寫田野筆記', href: 'https://yazelin.github.io/mori-field-notes/', height: 4.6 },
-    { id: 'yori', name: '優理', line: '想成為圖文作家的學徒', href: 'https://yazelin.github.io/yori-growth-log/', height: 4.4 }
+    { id: 'glitch', name: '格莉奇', line: '只有 4KB 記憶體的 AI 機器人少女，話說得很滿，下一秒就當機。', href: 'https://yazelin.github.io/characters/glitch/', height: 4.5 },
+    { id: 'blackhole', name: '黑洞先生', line: '黑洞的具現化。有正職，脾氣好，會把你忘掉的東西吃掉。', href: 'https://yazelin.github.io/characters/blackhole/', height: 5.0 },
+    { id: 'mori', name: 'Mori', line: '森林裡的精靈，也是我的桌面同伴。她的工作是記得。', href: 'https://yazelin.github.io/characters/mori/', height: 4.6 },
+    { id: 'yori', name: '優理', line: '森林宇宙裡的年輕學徒，正在把「有理」一點點練出來。', href: 'https://yazelin.github.io/characters/yori/', height: 4.4 }
 ]
 const STEP = 5.5
 
@@ -25,7 +26,9 @@ function floorText(lines, w, h)
     ctx.fillText(lines[0], 512, lines.length === 1 ? 128 : 92)
     if(lines[1])
     {
-        ctx.font = `bold 58px ${font}`
+        let size = 58
+        ctx.font = `bold ${size}px ${font}`
+        while(ctx.measureText(lines[1]).width > 990 && size > 24) { size -= 2; ctx.font = `bold ${size}px ${font}` }
         ctx.fillText(lines[1], 512, 200)
     }
     const mesh = new THREE.Mesh(
@@ -111,7 +114,6 @@ export default class CharacterPlazaSection
                 const ratio = t.image.width / t.image.height
                 plane.scale.set(c.height * ratio, c.height, 1)
             })
-            texture.colorSpace = THREE.SRGBColorSpace
             const plane = new THREE.Mesh(
                 new THREE.PlaneGeometry(1, 1),
                 new THREE.MeshBasicMaterial({ map: texture, transparent: true, alphaTest: 0.4, side: THREE.DoubleSide })
@@ -123,7 +125,7 @@ export default class CharacterPlazaSection
             this.standees.push(standee)
 
             // 名牌與格子
-            const label = floorText([c.name, c.line], 4.8, 1.2)
+            const label = floorText([c.name, c.line], 6, 1.5)
             label.position.set(x, y - 2.2, 0.01)
             this.container.add(label)
             const area = this.areas.add({ position: new THREE.Vector2(x, y - 3.8), halfExtents: new THREE.Vector2(1.6, 0.9) })

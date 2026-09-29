@@ -73,7 +73,6 @@ export default class CatWallSection
             const col = i % PER_ROW
             const row = Math.floor(i / PER_ROW)
             const texture = loader.load(`./models/cats/${cat.file}`)
-            texture.colorSpace = THREE.SRGBColorSpace
             const plane = new THREE.Mesh(new THREE.PlaneGeometry(FRAME, FRAME), new THREE.MeshBasicMaterial({ map: texture }))
             plane.rotation.x = Math.PI / 2
             plane.position.set(
