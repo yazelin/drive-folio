@@ -31,6 +31,9 @@ export default class ProjectsSection
 
         this.interDistance = 24
         this.positionRandomess = 5
+        // 原作九個作品排成一直線(約 216 公尺);改成兩排,第二排在第一排南邊(北邊是角色廣場),一樣面向鏡頭
+        this.perRow = 5
+        this.rowGap = - 26
         this.projectHalfWidth = 9
 
         this.container = new THREE.Object3D()
@@ -139,11 +142,12 @@ export default class ProjectsSection
 
     setZone()
     {
-        const totalWidth = this.list.length * (this.interDistance / 2)
+        const totalWidth = Math.min(this.list.length, this.perRow) * (this.interDistance / 2)
+        const rows = Math.ceil(this.list.length / this.perRow)
 
         const zone = this.zones.add({
-            position: { x: this.x + totalWidth - this.projectHalfWidth - 6, y: this.y },
-            halfExtents: { x: totalWidth, y: 12 },
+            position: { x: this.x + totalWidth - this.projectHalfWidth - 6, y: this.y + (rows - 1) * this.rowGap / 2 },
+            halfExtents: { x: totalWidth, y: 12 + (rows - 1) * this.rowGap / 2 },
             data: { cameraAngle: 'projects' }
         })
 
@@ -164,8 +168,10 @@ export default class ProjectsSection
 
     add(_options)
     {
-        const x = this.x + this.items.length * this.interDistance
-        let y = this.y
+        const row = Math.floor(this.items.length / this.perRow)
+        const col = this.items.length % this.perRow
+        const x = this.x + col * this.interDistance
+        let y = this.y + row * this.rowGap
         if(this.items.length > 0)
         {
             y += (Math.random() - 0.5) * this.positionRandomess
@@ -191,7 +197,10 @@ export default class ProjectsSection
         if(this.items.length >= 1)
         {
             const previousProject = this.items[this.items.length - 1]
-            const start = new THREE.Vector2(previousProject.x + this.projectHalfWidth, previousProject.y)
+            // 換排時從上一排第一個接過來(左邊往南轉)
+            const newRow = this.items.length % this.perRow === 0
+            const from = newRow ? this.items[this.items.length - this.perRow] : previousProject
+            const start = newRow ? new THREE.Vector2(from.x - this.projectHalfWidth, from.y - 4) : new THREE.Vector2(from.x + this.projectHalfWidth, from.y)
             const end = new THREE.Vector2(project.x - this.projectHalfWidth, project.y)
             const delta = end.clone().sub(start)
             this.tiles.add({
